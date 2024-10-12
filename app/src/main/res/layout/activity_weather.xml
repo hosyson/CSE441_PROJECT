@@ -15,8 +15,12 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="2dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/weather_header"
@@ -234,9 +238,8 @@
         android:id="@+id/future_list"
         android:layout_width="379dp"
         android:layout_height="160dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/future_label" />
 
