@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusableInTouchMode="true"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/txtAddCityLabel"
@@ -20,7 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:queryHint="Enter location"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/custom_search_field"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cityRecyclerView"
