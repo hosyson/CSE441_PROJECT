@@ -55,7 +55,7 @@ public class AddCity extends AppCompatActivity {
         searchBar.setOnQueryTextFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 // SearchView gained focus
-                Toast.makeText(this, "Focused", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Gained focus", Toast.LENGTH_SHORT).show();
             } else {
                 // SearchView lost focus
                 Toast.makeText(this, "Lost focus", Toast.LENGTH_SHORT).show();
@@ -79,15 +79,15 @@ public class AddCity extends AppCompatActivity {
                         || y < searchViewLocation[1] || y > (searchViewLocation[1] + searchBar.getHeight())) {
                     // Hide the keyboard and clear focus from SearchView
                     searchBar.clearFocus();
-                    hideKeyboard();
+                    View view = this.getCurrentFocus();
+                    hideKeyboard(view);
                 }
             }
         }
         return super.dispatchTouchEvent(ev);
     }
 
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
+    private void hideKeyboard(View view) {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             if (imm != null) {
