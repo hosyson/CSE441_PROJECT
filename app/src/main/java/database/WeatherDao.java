@@ -1,6 +1,5 @@
 package database;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.*;
 import java.util.List;
 
@@ -9,9 +8,14 @@ public interface WeatherDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(WeatherEntity weather);
 
-    @Query("SELECT * FROM weather WHERE city = :city")
-    LiveData<WeatherEntity> getWeatherForCity(String city);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<WeatherEntity> weatherList);
 
-    @Query("SELECT * FROM weather")
-    LiveData<List<WeatherEntity>> getAllWeather();
+    @Query("SELECT * FROM weather ORDER BY date DESC LIMIT 1")
+    WeatherEntity getLatestWeather();
+
+    @Query("SELECT * FROM weather ORDER BY date DESC LIMIT 11")
+    List<WeatherEntity> getWeatherFor11Days();
+
+    // Add other necessary queries
 }
