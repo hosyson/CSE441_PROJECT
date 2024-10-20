@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.weather"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -25,19 +25,38 @@ android {
             )
         }
     }
+
+    // Ensure compatibility with Java 1.8
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    // Enabling ViewBinding and DataBinding
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
-    implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.room.runtime)
+    implementation(libs.legacy.support.v4)
+    implementation(libs.lifecycle.livedata.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.ext.junit)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
 }
