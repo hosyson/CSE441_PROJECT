@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class WeatherRepository {
-    private static final String BASE_URL = "https://api.weatherbit.io/v2.0/";
-    private static final String API_KEY = "YOUR_API_KEY";
+    private static final String BASE_URL = " https://api.weatherbit.io/v2.0/current";
+    private static final String API_KEY = "fb0111d3c64c419989a6e5aaa834fdf6";
     private final WeatherApiService apiService;
     private final WeatherDao weatherDao;
     private final LocationManager locationManager;
