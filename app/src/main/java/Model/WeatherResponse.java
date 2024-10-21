@@ -13,6 +13,15 @@ public class WeatherResponse {
     private double avg_temp;
     private String date;
 
+    public int getAqi() {
+        return aqi;
+    }
+
+    public void setAqi(int aqi) {
+        this.aqi = aqi;
+    }
+
+    private int aqi;
     // Getters and setters
 
 
@@ -24,13 +33,6 @@ public class WeatherResponse {
         this.city_name = city_name;
     }
 
-    public String getCountry_code() {
-        return country_code;
-    }
-
-    public void setCountry_code(String country_code) {
-        this.country_code = country_code;
-    }
 
     public double getLat() {
         return lat;
@@ -87,6 +89,7 @@ public class WeatherResponse {
     public void setDate(String date) {
         this.date = date;
     }
+
 
     public static class CurrentWeather {
         private double temp;
