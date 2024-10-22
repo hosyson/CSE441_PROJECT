@@ -15,7 +15,8 @@ import com.example.weather.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.WeatherResponse;
+import Model.WeatherResponse;
+
 
 public class TodayTempItemAdapter extends ArrayAdapter<WeatherResponse> {
 
