@@ -1,38 +1,42 @@
-package model;
+package Model;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class WeatherResponse {
-    private String city_name;
-    private String country_code;
+    @SerializedName("city_name")
+    private String cityName;
+
+    @SerializedName("country_code")
+    private String countryCode;
+
     private double lat;
     private double lon;
     private String timezone;
+
     private CurrentWeather current;
     private List<HourlyForecast> hourly;
     private double avg_temp;
     private String date;
 
-    public int getAqi() {
-        return aqi;
-    }
+    private int aqi; // Air Quality Index
 
-    public void setAqi(int aqi) {
-        this.aqi = aqi;
-    }
-
-    private int aqi;
     // Getters and setters
-
-
-    public String getCity_name() {
-        return city_name;
+    public String getCityName() {
+        return cityName;
     }
 
-    public void setCity_name(String city_name) {
-        this.city_name = city_name;
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 
     public double getLat() {
         return lat;
@@ -90,6 +94,13 @@ public class WeatherResponse {
         this.date = date;
     }
 
+    public int getAqi() {
+        return aqi;
+    }
+
+    public void setAqi(int aqi) {
+        this.aqi = aqi;
+    }
 
     public static class CurrentWeather {
         private double temp;
@@ -101,7 +112,6 @@ public class WeatherResponse {
         private String weather_description;
 
         // Getters and setters
-
         public double getTemp() {
             return temp;
         }
@@ -168,7 +178,6 @@ public class WeatherResponse {
         private String weather_description;
 
         // Getters and setters
-
         public String getTimestamp() {
             return timestamp;
         }
@@ -217,6 +226,4 @@ public class WeatherResponse {
             this.weather_description = weather_description;
         }
     }
-
-    // Existing getters and setters
 }
