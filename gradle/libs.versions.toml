@@ -40,6 +40,7 @@ roomRuntimeVersion = "2.5.2"
 legacySupportV4 = "1.0.0"
 lifecycleLivedataKtx = "2.8.6"
 lifecycleViewmodelKtx = "2.8.6"
+timeshape = "2021d.10"
 
 [libraries]
 appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -85,6 +86,7 @@ room-runtime-v252 = { module = "androidx.room:room-runtime", version.ref = "room
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+timeshape = { module = "net.iakovlev:timeshape", version.ref = "timeshape" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

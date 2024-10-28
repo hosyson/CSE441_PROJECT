@@ -1,13 +1,17 @@
 package api;
 
-import Model.DailyWeather;
 import Model.currentWeather.WeatherResponse;
+import Model.dailyWeather.DailyWeather;
+import Model.dailyWeather.DailyWeatherResponse;
+import Model.hourlyWeather.HourlyWeather;
+import Model.hourlyWeather.HourlyWeatherResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface WeatherApiService {
 
+    //current weather
     @GET("current")
     Call<WeatherResponse> getCurrentWeatherByCity(
             @Query("city") String city,
@@ -21,8 +25,10 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
+    //hourly weather
+    //get history weather hourly, use for today weather
     @GET("history/hourly")
-    Call<DailyWeather> getHourlyForecastByCity(
+    Call<HourlyWeatherResponse> getHourlyHistoryByCity(
             @Query("city") String city,
             @Query("start_date") String startDate,
             @Query("end_date") String endDate,
@@ -30,7 +36,7 @@ public interface WeatherApiService {
     );
 
     @GET("history/hourly")
-    Call<DailyWeather> getHourlyForecastByLocation(
+    Call<HourlyWeatherResponse> getHourlyHistoryByLocation(
             @Query("lat") Double latitude,
             @Query("lon") Double longitude,
             @Query("start_date") String startDate,
@@ -38,24 +44,44 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
-    @GET("forecast/daily")
-    Call<DailyWeather> getDailyForecastByCity(
+    //get forecast weather hourly, use for future weather
+    @GET("forecast/hourly")
+    Call<HourlyWeatherResponse> getHourlyForecastByCity(
             @Query("city") String city,
             @Query("start_date") String startDate,
             @Query("end_date") String endDate,
             @Query("key") String apiKey
     );
 
+    @GET("forecast/hourly")
+    Call<HourlyWeatherResponse> getHourlyForecastByLocation(
+            @Query("lat") Double latitude,
+            @Query("lon") Double longitude,
+            @Query("start_date") String startDate,
+            @Query("end_date") String endDate,
+            @Query("key") String apiKey
+    );
+
+    //daily weather
+    //get forecast weather daily, use for future weather
     @GET("forecast/daily")
-    Call<DailyWeather> getDailyForecastByLocation(
+    Call<DailyWeatherResponse> getDailyForecastByCity(
+            @Query("city") String city,
+            @Query("days") int days,
+            @Query("key") String apiKey
+    );
+
+    @GET("forecast/daily")
+    Call<DailyWeatherResponse> getDailyForecastByLocation(
             @Query("lat") Double latitude,
             @Query("lon") Double longitude,
             @Query("days") int days,
             @Query("key") String apiKey
     );
 
+    //get history weather daily, use for past weather
     @GET("history/daily")
-    Call<DailyWeather> getHistoryWeatherByCity(
+    Call<DailyWeatherResponse> getHistoryDailyByCity(
             @Query("city") String city,
             @Query("start_date") String startDate,
             @Query("end_date") String endDate,
@@ -63,7 +89,7 @@ public interface WeatherApiService {
     );
 
     @GET("history/daily")
-    Call<DailyWeather> getHistoryWeatherByLocation(
+    Call<DailyWeatherResponse> getHistoryDailyByLocation(
             @Query("lat") Double latitude,
             @Query("lon") Double longitude,
             @Query("start_date") String startDate,

@@ -69,6 +69,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         try {
             HomeViewModelFactory factory = new HomeViewModelFactory(
                     requireActivity().getApplication(),
@@ -78,7 +79,7 @@ public class HomeFragment extends Fragment {
             mViewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
             Log.d("HomeFragment", "ViewModel created successfully");
 
-            mViewModel.getWeatherData().observe(getViewLifecycleOwner(), weatherData -> {
+            mViewModel.getCurrentWeatherData().observe(getViewLifecycleOwner(), weatherData -> {
                 Log.d("HomeFragment", "Weather data updated: " +
                         (weatherData != null ? weatherData.toString() : "null"));
 
@@ -100,6 +101,18 @@ public class HomeFragment extends Fragment {
         } catch (Exception e) {
             Log.e("HomeFragment", "Error creating ViewModel", e);
         }
+
+        mViewModel.getHourlyWeatherData().observe(getViewLifecycleOwner(), hourlyWeatherData -> {
+            Log.d("HomeFragment", "Hourly weather data updated: " +
+                    (hourlyWeatherData != null ? hourlyWeatherData.toString() : "null"));
+            if (hourlyWeatherData != null) {
+                try {
+                    Log.d("HomeFragment", "Hourly weather data updated: " + hourlyWeatherData);
+                } catch (Exception e) {
+                    Log.e("HomeFragment", "Error updating UI", e);
+                }
+            }
+        });
     }
 
     private void checkLocationPermissionAndInitialize() {
@@ -164,7 +177,7 @@ public class HomeFragment extends Fragment {
                 mViewModel = new ViewModelProvider(this, factory).get(HomeViewModel.class);
 
                 // Observe weather data
-                mViewModel.getWeatherData().observe(getViewLifecycleOwner(), weatherData -> {
+                mViewModel.getCurrentWeatherData().observe(getViewLifecycleOwner(), weatherData -> {
                     if (weatherData != null) {
                         updateUI(weatherData);
                     }

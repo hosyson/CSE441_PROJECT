@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-import Model.DailyWeather;
+import Model.dailyWeather.DailyWeather;
 import Model.hourlyWeather.HourlyWeather;
 
 public class Weather {
