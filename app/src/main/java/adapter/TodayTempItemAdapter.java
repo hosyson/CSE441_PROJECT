@@ -13,18 +13,17 @@ import androidx.annotation.Nullable;
 import com.example.weather.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import Model.WeatherResponse;
+import Model.currentWeather.WeatherData;
 
 
-public class TodayTempItemAdapter extends ArrayAdapter<WeatherResponse> {
+public class TodayTempItemAdapter extends ArrayAdapter<WeatherData> {
 
     Activity context;
-    ArrayList<WeatherResponse> arrayList;
+    ArrayList<WeatherData> arrayList;
     int layoutId;
 
-    public TodayTempItemAdapter(Activity context, int layoutId, ArrayList<WeatherResponse> arrayList) {
+    public TodayTempItemAdapter(Activity context, int layoutId, ArrayList<WeatherData> arrayList) {
         super(context, layoutId, arrayList);
         this.context = context;
         this.arrayList = arrayList;
@@ -38,11 +37,7 @@ public class TodayTempItemAdapter extends ArrayAdapter<WeatherResponse> {
         convertView = inflater.inflate(layoutId, null);
         TextView txtTodayHour = convertView.findViewById(R.id.txtTodayHour);
         TextView txtTodayTemp = convertView.findViewById(R.id.txtTodayTemp);
-        WeatherResponse weatherResponse = arrayList.get(position);
-        List<WeatherResponse.HourlyForecast> hourlyForecasts;
-        hourlyForecasts = weatherResponse.getHourly();
-        txtTodayHour.setText(hourlyForecasts.get(position).getTimestamp());
-        txtTodayTemp.setText(String.valueOf(hourlyForecasts.get(position).getTemp()));
+        WeatherData weatherDataResponse = arrayList.get(position);
         return convertView;
     }
 }

@@ -34,7 +34,9 @@ public interface WeatherDao {
 
     // Lấy bản ghi thời tiết mới nhất
     @Query("SELECT * FROM weather ORDER BY date DESC LIMIT 1")
-    WeatherEntity getLatestWeather();
+    static WeatherEntity getLatestWeather() {
+        return null;
+    }
 
     // Lấy dữ liệu thời tiết cho 11 ngày gần nhất
     @Query("SELECT * FROM weather ORDER BY date DESC LIMIT 11")

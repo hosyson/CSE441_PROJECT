@@ -1,26 +1,32 @@
 package repository;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.google.gson.Gson;
+
+import Model.currentWeather.Weather;
+import Model.currentWeather.WeatherData;
+import Model.currentWeather.WeatherResponse;
 import api.WeatherApiService;
 import database.WeatherDao;
 import database.WeatherDatabase;
-import database.WeatherEntity;
-import Model.WeatherResponse;
-import Model.ForecastResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import utils.LocationManager;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.IOException;
 
 public class WeatherRepository {
     private static final String BASE_URL = "https://api.weatherbit.io/v2.0/";
     private static final String API_KEY = "fb0111d3c64c419989a6e5aaa834fdf6";
+    private static final String TAG = "WeatherRepository";
     private final WeatherApiService apiService;
     private final WeatherDao weatherDao;
     private final LocationManager locationManager;
@@ -41,152 +47,78 @@ public class WeatherRepository {
         locationManager = new LocationManager(context);
     }
 
-    // New method to fetch weather for the current location
-    public LiveData<WeatherResponse> getWeatherForCurrentLocation() {
-        Double latitude = locationManager.getLatitude();
-        Double longitude = locationManager.getLongitude();
-        return getTodayWeather(null, latitude, longitude);
-    }
+    public LiveData<Weather> getCurrentWeather(String city, Double latitude, Double longitude) {
+        MutableLiveData<Weather> weatherData = new MutableLiveData<>();
 
-    // Method to fetch today's weather
-    public LiveData<WeatherResponse> getTodayWeather(String city, Double latitude, Double longitude) {
-        MutableLiveData<WeatherResponse> data = new MutableLiveData<>();
-
-        if (!isNetworkAvailable(context)) {
-            WeatherEntity cachedWeather = weatherDao.getLatestWeather();
-            if (cachedWeather != null) {
-                data.setValue(convertEntityToResponse(cachedWeather));
-                showNoInternetDialog();
-            } else {
-                data.setValue(null);
-                showNoInternetDialog();
-            }
-            return data;
+        Call<WeatherResponse> call;
+        if (city != null) {
+            call = apiService.getCurrentWeatherByCity(city, API_KEY);
+        } else {
+            call = apiService.getCurrentWeatherByLocation(latitude, longitude, API_KEY);
         }
 
-        Call<WeatherResponse> call = (city != null) ?
-                apiService.getCurrentWeatherByCity(city, API_KEY) :
-                apiService.getCurrentWeatherByLocation(latitude, longitude, API_KEY);
+        Log.d(TAG, "API Call URL: " + call.request().url());
 
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    WeatherResponse currentWeather = response.body();
+                    Log.d(TAG, "Raw Response: " + new Gson().toJson(response.body()));
 
-                    // Optionally, fetch forecast data for better accuracy
-                    apiService.getDailyForecastByLocation(currentWeather.getLat(), currentWeather.getLon(), 1, API_KEY)
-                            .enqueue(new Callback<ForecastResponse>() {
-                                @Override
-                                public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
-                                    if (response.isSuccessful() && response.body() != null) {
-                                        data.setValue(currentWeather);
-                                        saveWeatherData(currentWeather);
-                                    } else {
-                                        data.setValue(null);
-                                    }
-                                }
+                    WeatherResponse weatherResponse = response.body();
+                    if (weatherResponse.getData() != null && !weatherResponse.getData().isEmpty()) {
+                        Weather weather = convertResponseToWeather(weatherResponse.getData().get(0));
+                        weatherData.setValue(weather);
 
-                                @Override
-                                public void onFailure(Call<ForecastResponse> call, Throwable t) {
-                                    data.setValue(null);
-                                }
-                            });
+                    } else {
+                        Log.e(TAG, "Response data is null or empty");
+                        weatherData.setValue(null);
+                    }
                 } else {
-                    data.setValue(null);
+                    try {
+                        Log.e(TAG, "Error Response: " +
+                                (response.errorBody() != null ? response.errorBody().string() : "null"));
+                    } catch (IOException e) {
+                        Log.e(TAG, "Error reading error body", e);
+                    }
+                    weatherData.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
-                data.setValue(null);
+                Log.e(TAG, "API call failed", t);
+                weatherData.setValue(null);
             }
         });
 
-        return data;
+        return weatherData;
     }
 
-    // Method to fetch 11-day forecast
-    public LiveData<List<ForecastResponse.DailyForecast>> get11DaysForecast(String city, Double latitude, Double longitude) {
-        MutableLiveData<List<ForecastResponse.DailyForecast>> data = new MutableLiveData<>();
-        List<ForecastResponse.DailyForecast> result = new ArrayList<>();
-
-        if (!isNetworkAvailable(context)) {
-            List<WeatherEntity> cachedWeather = weatherDao.getWeatherFor11Days();
-            if (!cachedWeather.isEmpty()) {
-                for (WeatherEntity entity : cachedWeather) {
-                    result.add(convertEntityToDailyForecast(entity));
-                }
-                data.setValue(result);
-                showNoInternetDialog();
-            } else {
-                data.setValue(null);
-                showNoInternetDialog();
-            }
-            return data;
-        }
-
-        Call<ForecastResponse> forecastCall = (city != null) ?
-                apiService.getDailyForecastByCity(city, 11, API_KEY) :
-                apiService.getDailyForecastByLocation(latitude, longitude, 11, API_KEY);
-
-        forecastCall.enqueue(new Callback<ForecastResponse>() {
-            @Override
-            public void onResponse(Call<ForecastResponse> call, Response<ForecastResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    data.setValue(response.body().getData());
-                } else {
-                    data.setValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ForecastResponse> call, Throwable t) {
-                data.setValue(null);
-            }
-        });
-
-        return data;
-    }
-
-    // Convert WeatherEntity to WeatherResponse
-    private WeatherResponse convertEntityToResponse(WeatherEntity entity) {
-        WeatherResponse response = new WeatherResponse();
-        response.setCityName(entity.getCity_name());
-        response.setLat(entity.getLat());
-        response.setLon(entity.getLon());
-        response.setAvg_temp(entity.getAvg_temp());
-        response.setDate(entity.getDate());
-        response.setAqi(entity.getAqi());
-        return response;
-    }
-
-    // Save WeatherResponse into the database
-    private void saveWeatherData(WeatherResponse weather) {
-        WeatherEntity entity = new WeatherEntity();
-        entity.setCity_name(weather.getCityName());
-        entity.setLat(weather.getLat());
-        entity.setLon(weather.getLon());
-        entity.setAvg_temp(weather.getAvg_temp());
-        entity.setDate(weather.getDate());
-        entity.setAqi(weather.getAqi());
-        weatherDao.insertWeather(entity);
-    }
-
-    // Convert WeatherEntity to DailyForecast
-    private ForecastResponse.DailyForecast convertEntityToDailyForecast(WeatherEntity entity) {
-        ForecastResponse.DailyForecast forecast = new ForecastResponse.DailyForecast();
-        forecast.setTemp(entity.getAvg_temp());
-        forecast.setDatetime(entity.getDate());
-        return forecast;
+    private Weather convertResponseToWeather(WeatherData data) {
+        Weather weather = new Weather();
+        weather.setCityName(data.getCityName());
+        weather.setLat(data.getLat());
+        weather.setLon(data.getLon());
+        weather.setDatetime(data.getDatetime());
+        weather.setDescription(data.getWeather().getDescription());
+        weather.setTemperature(data.getTemperature());
+        weather.setHumidity(data.getHumidity());
+        weather.setPrecipProbability(data.getPrecipProbability());
+        weather.setWindSpeed(data.getWindSpeed());
+        weather.setIcon(data.getWeather().getIcon());
+        return weather;
     }
 
     private boolean isNetworkAvailable(Context context) {
-        // Implement network availability check
+        // Implement logic to check network availability
         return true;
     }
 
     private void showNoInternetDialog() {
-        // Show a dialog when no internet is available
+        // Implement logic to show no internet dialog
     }
 }
+
+
+
