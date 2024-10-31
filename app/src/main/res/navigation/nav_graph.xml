@@ -16,9 +16,11 @@
             android:id="@+id/action_homeFragment_to_cityListFragment"
             app:destination="@id/cityListFragment" />
 
+
         <action
             android:id="@+id/action_homeFragment_to_Weather24hFragment"
             app:destination="@id/Weather24hFragment" />
+
 
     </fragment>
     <fragment
@@ -37,5 +39,7 @@
         android:name="ui.today.Weather24hFragment"
         tools:layout="@layout/fragment_weather24h"
         android:label="Weather 24h" />
+
+
 
 </navigation>
