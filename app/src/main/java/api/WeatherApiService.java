@@ -3,6 +3,7 @@ package api;
 import Model.currentWeather.WeatherResponse;
 import Model.dailyWeather.DailyWeather;
 import Model.dailyWeather.DailyWeatherResponse;
+import Model.history.HistoryResponse;
 import Model.hourlyWeather.HourlyWeather;
 import Model.hourlyWeather.HourlyWeatherResponse;
 import retrofit2.Call;
@@ -96,4 +97,20 @@ public interface WeatherApiService {
             @Query("end_date") String endDate,
             @Query("key") String apiKey
     );
+
+    @GET("forecast.json")
+    Call<WeatherResponse> getWeatherForecast(
+            @Query("key") String apiKey,
+            @Query("q") String location,
+            @Query("days") int days
+    );
+
+    @GET("history.json")
+    Call<HistoryResponse> getWeatherHistory(
+            @Query("q") String location,
+            @Query("dt") String date, // Ngày theo định dạng YYYY-MM-DD
+            @Query("key") String apiKey
+    );
+
+
 }

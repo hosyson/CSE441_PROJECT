@@ -38,6 +38,13 @@
         android:name="ui.today.Weather24hFragment"
         tools:layout="@layout/fragment_weather24h"
         android:label="Weather 24h" />
+
+<<<<<<< HEAD
+    <fragment
+        android:id="@+id/Weather24hFragment"
+        android:name="ui.today.Weather24hFragment"
+        tools:layout="@layout/fragment_weather24h"
+        android:label="Weather 24h" />
 =======
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
 </navigation>
