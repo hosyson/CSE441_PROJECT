@@ -1,41 +1,37 @@
-package Model.FivedaysWeather;
+package Model;
 
 public class Forecast {
-    private String date;
-    private Day day;
+    private String date; // Ngày
+    private String dayOfWeek; // Ngày trong tuần
+    private String temperature; // Nhiệt độ
+    private String weatherCondition; // Điều kiện thời tiết
+    private String iconUrl; // Đường dẫn đến biểu tượng thời tiết
+
+    public Forecast(String date, String dayOfWeek, String temperature, String weatherCondition, String iconUrl) {
+        this.date = date;
+        this.dayOfWeek = dayOfWeek;
+        this.temperature = temperature;
+        this.weatherCondition = weatherCondition;
+        this.iconUrl = iconUrl;
+    }
 
     public String getDate() {
         return date;
     }
 
-    public Day getDay() {
-        return day;
+    public String getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public class Day {
-        private double maxtemp_c;
-        private double mintemp_c;
-        private Condition condition;
-
-        public double getMaxtempC() {
-            return maxtemp_c;
-        }
-
-        public double getMintempC() {
-            return mintemp_c;
-        }
-
-        public Condition getCondition() {
-            return condition;
-        }
+    public String getTemperature() {
+        return temperature;
     }
 
-    public class Condition {
-        private String icon;
+    public String getWeatherCondition() {
+        return weatherCondition;
+    }
 
-        public String getIcon() {
-            return "https:" + icon; // icon là đường dẫn tương đối, thêm "https:" để tạo URL đầy đủ
-        }
+    public String getIconUrl() {
+        return iconUrl;
     }
 }
-

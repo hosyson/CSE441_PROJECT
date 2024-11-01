@@ -1,5 +1,15 @@
 package adapter;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.weather.R;
+import java.util.List;
+import Model.history.ForecastDay;
+
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     private List<ForecastDay> historyList;
@@ -20,8 +30,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         ForecastDay forecastDay = historyList.get(position);
 
         holder.tvDate.setText(forecastDay.getDate());
-        holder.tvTemp.setText("Nhiệt độ trung bình: " + forecastDay.getDay().getAvgTempC() + "°C");
-        holder.tvCondition.setText("Điều kiện: " + forecastDay.getDay().getCondition().getText());
+        holder.tvTemp.setText("Nhiệt độ: " + forecastDay.getDay().getAvgTempC() + "°C");
+        holder.tvCondition.setText("Thời tiết: " + forecastDay.getDay().getCondition().getText());
     }
 
     @Override

@@ -15,11 +15,13 @@
         <action
             android:id="@+id/action_homeFragment_to_cityListFragment"
             app:destination="@id/cityListFragment" />
-<<<<<<< HEAD
         <action
             android:id="@+id/action_homeFragment_to_Weather24hFragment"
             app:destination="@id/Weather24hFragment" />
-=======
+
+        <action
+            android:id="@+id/action_homeFragment_to_Forecast5DaysFragment"
+            app:destination="@id/Forecast5DaysFragment" />
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
     </fragment>
     <fragment
@@ -32,19 +34,16 @@
         android:name="ui.citylist.CityListFragment"
         android:label="fragment_city_list"
         tools:layout="@layout/fragment_city_list" />
-<<<<<<< HEAD
     <fragment
         android:id="@+id/Weather24hFragment"
         android:name="ui.today.Weather24hFragment"
         tools:layout="@layout/fragment_weather24h"
         android:label="Weather 24h" />
-
-<<<<<<< HEAD
     <fragment
-        android:id="@+id/Weather24hFragment"
-        android:name="ui.today.Weather24hFragment"
-        tools:layout="@layout/fragment_weather24h"
-        android:label="Weather 24h" />
+        android:id="@+id/Forecast5DaysFragment"
+        android:name="ui.Fivedays.Forecast5DaysFragment"
+        tools:layout="@layout/fragment_forecast5days"
+        android:label="5 days" />
 =======
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
 </navigation>

@@ -28,8 +28,6 @@ public class CustomAdapter24h extends BaseAdapter {
         this.context = context;
     }
 
-
-
     @Override
     public int getCount() {
         return arrayList.size();
