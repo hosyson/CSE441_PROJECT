@@ -30,7 +30,9 @@ import utils.LocationManager;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel mViewModel;
+
     private TextView txtCity, txtCurrentTimeStamp, txtDescription, txtCurrentTemp,txtTodayLabel;
+
     private ImageView imgCurrentWeatherIcon, imageViewRain, imageViewWind, imageViewHumidity;
     private static final String TAG = "HomeFragment";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
@@ -53,12 +55,15 @@ public class HomeFragment extends Fragment {
         imageViewRain = view.findViewById(R.id.imageView2);
         imageViewWind = view.findViewById(R.id.imageView3);
         imageViewHumidity = view.findViewById(R.id.imageView4);
+
         txtTodayLabel = view.findViewById(R.id.txtTodayLabel);
 
         txtTodayLabel.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
             navController.navigate(R.id.action_homeFragment_to_Weather24hFragment);
         });
+
+
         // Cài đặt sự kiện cho FloatingActionButton
         fab.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
