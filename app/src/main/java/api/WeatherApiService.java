@@ -2,10 +2,8 @@ package api;
 
 import Model.FivedaysWeather.Forecast5DaysResponse;
 import Model.currentWeather.WeatherResponse;
-import Model.dailyWeather.DailyWeather;
 import Model.dailyWeather.DailyWeatherResponse;
 import Model.history.HistoryResponse;
-import Model.hourlyWeather.HourlyWeather;
 import Model.hourlyWeather.HourlyWeatherResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,7 +11,7 @@ import retrofit2.http.Query;
 
 public interface WeatherApiService {
 
-    //current weather
+    // Current weather
     @GET("current")
     Call<WeatherResponse> getCurrentWeatherByCity(
             @Query("city") String city,
@@ -27,8 +25,7 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
-    //hourly weather
-    //get history weather hourly, use for today weather
+    // Hourly weather
     @GET("history/hourly")
     Call<HourlyWeatherResponse> getHourlyHistoryByCity(
             @Query("city") String city,
@@ -46,7 +43,6 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
-    //get forecast weather hourly, use for future weather
     @GET("forecast/hourly")
     Call<HourlyWeatherResponse> getHourlyForecastByCity(
             @Query("city") String city,
@@ -64,8 +60,7 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
-    //daily weather
-    //get forecast weather daily, use for future weather
+    // Daily weather
     @GET("forecast/daily")
     Call<DailyWeatherResponse> getDailyForecastByCity(
             @Query("city") String city,
@@ -81,7 +76,6 @@ public interface WeatherApiService {
             @Query("key") String apiKey
     );
 
-    //get history weather daily, use for past weather
     @GET("history/daily")
     Call<DailyWeatherResponse> getHistoryDailyByCity(
             @Query("city") String city,
@@ -100,7 +94,7 @@ public interface WeatherApiService {
     );
 
     @GET("forecast.json")
-    Call<Forecast5DaysResponse> getWeatherForecast(
+    Call<Forecast5DaysResponse> getForecast5DaysResponse(
             @Query("key") String apiKey,
             @Query("q") String location,
             @Query("days") int days
@@ -112,6 +106,4 @@ public interface WeatherApiService {
             @Query("q") String location,
             @Query("dt") String date
     );
-
-
 }

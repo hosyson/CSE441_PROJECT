@@ -1,4 +1,4 @@
-package Model;
+package Model.FivedaysWeather;
 
 public class Forecast {
     private String date; // Ngày
@@ -33,5 +33,16 @@ public class Forecast {
 
     public String getIconUrl() {
         return iconUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Forecast{" +
+                "date='" + date + '\'' +
+                ", dayOfWeek='" + dayOfWeek + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", weatherCondition='" + weatherCondition + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                '}';
     }
 }

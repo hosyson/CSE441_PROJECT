@@ -24,18 +24,28 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_day, parent, false);
         return new HistoryViewHolder(view);
     }
-
+    
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         ForecastDay forecastDay = historyList.get(position);
 
-        // Null check to prevent crashes in case data is missing
-        if (forecastDay != null && forecastDay.getDay() != null && forecastDay.getDay().getCondition() != null) {
+        // Kiểm tra xem forecastDay và day có khác null không
+        if (forecastDay != null && forecastDay.getDay() != null) {
             holder.tvDate.setText(forecastDay.getDate() != null ? forecastDay.getDate() : "N/A");
-            holder.tvTemp.setText("Temperature: " + forecastDay.getDay().getAvgTempC() + "°C");
-            holder.tvCondition.setText("Condition: " + forecastDay.getDay().getCondition().getText());
+
+            // Lấy nhiệt độ tối đa và tối thiểu
+            double maxTemp = forecastDay.getDay().getMaxTempC(); // Sử dụng getMaxTempC()
+            double minTemp = forecastDay.getDay().getMinTempC(); // Sử dụng getMinTempC()
+            holder.tvTemp.setText(String.format("Max Temp: %.1f°C, Min Temp: %.1f°C", maxTemp, minTemp));
+
+            // Lấy điều kiện thời tiết
+            if (forecastDay.getDay().getCondition() != null) {
+                holder.tvCondition.setText(String.format("Condition: %s", forecastDay.getDay().getCondition().getText()));
+            } else {
+                holder.tvCondition.setText("Condition: N/A");
+            }
         } else {
-            // Setting placeholders in case of missing data
+            // Thiết lập giá trị mặc định trong trường hợp dữ liệu bị thiếu
             holder.tvDate.setText("N/A");
             holder.tvTemp.setText("Temperature: N/A");
             holder.tvCondition.setText("Condition: N/A");

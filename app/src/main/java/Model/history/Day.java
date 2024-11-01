@@ -1,50 +1,37 @@
 package Model.history;
 
 public class Day {
-    private double maxtemp_c;
-    private double mintemp_c;
-    private double avgtemp_c;
-    private Condition condition;
+    private double maxTempC;  // Biến để lưu trữ nhiệt độ tối đa
+    private double minTempC;  // Biến để lưu trữ nhiệt độ tối thiểu
+    private Condition condition;  // Biến để lưu trữ điều kiện thời tiết
 
+    // Phương thức để lấy nhiệt độ tối đa
     public double getMaxTempC() {
-        return maxtemp_c;
+        return maxTempC;
     }
 
-    public void setMaxTempC(double maxtemp_c) {
-        this.maxtemp_c = maxtemp_c;
+    // Phương thức để thiết lập nhiệt độ tối đa
+    public void setMaxTempC(double maxTempC) {
+        this.maxTempC = maxTempC;
     }
 
+    // Phương thức để lấy nhiệt độ tối thiểu
     public double getMinTempC() {
-        return mintemp_c;
+        return minTempC;
     }
 
-    public void setMinTempC(double mintemp_c) {
-        this.mintemp_c = mintemp_c;
+    // Phương thức để thiết lập nhiệt độ tối thiểu
+    public void setMinTempC(double minTempC) {
+        this.minTempC = minTempC;
     }
 
-    public double getAvgTempC() {
-        return avgtemp_c;
-    }
-
-    public void setAvgTempC(double avgtemp_c) {
-        this.avgtemp_c = avgtemp_c;
-    }
-
+    // Phương thức để lấy điều kiện thời tiết
     public Condition getCondition() {
         return condition;
     }
 
+    // Phương thức để thiết lập điều kiện thời tiết
     public void setCondition(Condition condition) {
         this.condition = condition;
     }
-    @Override
-    public String toString() {
-        return "Day{" +
-                "maxtemp_c=" + maxtemp_c +
-                ", mintemp_c=" + mintemp_c +
-                ", avgtemp_c=" + avgtemp_c +
-                ", condition=" + condition +
-                '}';
-    }
-
 }

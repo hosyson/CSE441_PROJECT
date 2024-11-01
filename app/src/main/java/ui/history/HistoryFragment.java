@@ -69,8 +69,8 @@ public class HistoryFragment extends Fragment {
                                 ForecastDay forecastDay = new ForecastDay();
                                 forecastDay.setDate(date);
                                 Day dayModel = new Day();
-                                dayModel.setMaxTempC(maxTemp);
-                                dayModel.setMinTempC(minTemp);
+                                dayModel.setMaxTempC(maxTemp); // Đảm bảo phương thức này đã tồn tại
+                                dayModel.setMinTempC(minTemp); // Đảm bảo phương thức này đã tồn tại
                                 Condition condition = new Condition();
                                 condition.setText(conditionText);
                                 dayModel.setCondition(condition);
@@ -91,4 +91,5 @@ public class HistoryFragment extends Fragment {
         });
         requestQueue.add(stringRequest);
     }
+
 }

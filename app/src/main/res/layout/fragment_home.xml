@@ -15,11 +15,13 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:layout_margin="16dp"
             android:background="#FFFFFF"
-            android:clickable="true"
             android:src="@android:drawable/ic_input_add"
             app:backgroundTint="#FFFFFF"
-            android:contentDescription="Add a new entry" /> <!-- Mô tả cho nút -->
+            android:contentDescription="Add a new entry" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

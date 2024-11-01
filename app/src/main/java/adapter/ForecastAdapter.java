@@ -6,15 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.bumptech.glide.Glide;  // Thêm import Glide
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.weather.R;
-
 import java.util.List;
-
-import Model.Forecast;
+import Model.FivedaysWeather.Forecast;
+import Model.FivedaysWeather.Forecast5DaysResponse;
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder> {
     private Context context;
@@ -38,8 +36,11 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         holder.tvDate.setText(forecast.getDate());
         holder.tvTemperature.setText(forecast.getTemperature() + "°C");
         holder.tvCondition.setText(forecast.getWeatherCondition());
-        // Tải biểu tượng thời tiết bằng thư viện như Glide hoặc Picasso
-        // Glide.with(context).load(forecast.getIconUrl()).into(holder.imgWeatherIcon);
+        // Tải biểu tượng thời tiết
+        String iconUrl = "https:" + forecast.getIconUrl(); // Thêm "https:" vào trước URL nếu cần
+        Glide.with(context)
+                .load(iconUrl)
+                .into(holder.imgWeatherIcon);
     }
 
     @Override
