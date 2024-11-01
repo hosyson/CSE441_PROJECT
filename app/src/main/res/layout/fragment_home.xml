@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#87CEEB"
-    android:orientation="vertical"
     android:padding="16dp">
 
     <FrameLayout
@@ -19,12 +18,22 @@
             android:background="#FFFFFF"
             android:clickable="true"
             android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="#FFFFFF" />
+            app:backgroundTint="#FFFFFF"
+            android:contentDescription="Add a new entry" /> <!-- Mô tả cho nút -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTodayLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:text="Today"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtCity"
@@ -152,37 +161,27 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtTodayLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Today"
-                android:textSize="20sp" />
-
-            <ScrollView
+            <Button
+                android:id="@+id/btnAround5Days"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
-            </ScrollView>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="367dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Around 5 days"
-                android:textSize="20sp" />
+                android:layout_margin="5dp"
+                android:text="Around 5 Days"
+                android:background="@android:color/transparent"
+                android:textSize="16sp"
+                android:padding="8dp"
+            android:textColor="#FFFFFF" />
 
             <Button
                 android:id="@+id/btnViewHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="History" />
+                android:layout_margin="5dp"
+                android:text="History"
+                android:background="@android:color/transparent"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
     </FrameLayout>

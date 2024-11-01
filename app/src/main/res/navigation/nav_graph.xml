@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -24,34 +25,35 @@
         <action
             android:id="@+id/action_homeFragment_to_HistoryFragment"
             app:destination="@id/HistoryFragment" />
-
->>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+
     <fragment
         android:id="@+id/cityListFragment"
         android:name="ui.citylist.CityListFragment"
         android:label="fragment_city_list"
         tools:layout="@layout/fragment_city_list" />
+
     <fragment
         android:id="@+id/Weather24hFragment"
         android:name="ui.today.Weather24hFragment"
         tools:layout="@layout/fragment_weather24h"
         android:label="Weather 24h" />
+
     <fragment
         android:id="@+id/Forecast5DaysFragment"
         android:name="ui.Fivedays.Forecast5DaysFragment"
         tools:layout="@layout/fragment_forecast5days"
         android:label="5 days" />
+
     <fragment
         android:id="@+id/HistoryFragment"
         android:name="ui.history.HistoryFragment"
         tools:layout="@layout/fragment_history"
         android:label="History Forecast" />
-=======
->>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
 </navigation>

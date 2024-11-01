@@ -75,5 +75,6 @@ dependencies {
     implementation ("androidx.constraintlayout:constraintlayout:2.0.4")
     implementation ("com.google.android.material:material:1.4.0")
     implementation ("androidx.recyclerview:recyclerview:1.2.1")
-
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
 }

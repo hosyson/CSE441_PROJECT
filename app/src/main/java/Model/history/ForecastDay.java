@@ -19,4 +19,13 @@ public class ForecastDay {
     public void setDay(Day day) {
         this.day = day;
     }
+
+    @Override
+    public String toString() {
+        return "ForecastDay{" +
+                "date='" + date + '\'' +
+                ", day=" + day +
+                '}';
+    }
+
 }

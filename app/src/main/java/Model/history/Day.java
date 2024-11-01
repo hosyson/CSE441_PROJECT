@@ -37,4 +37,14 @@ public class Day {
     public void setCondition(Condition condition) {
         this.condition = condition;
     }
+    @Override
+    public String toString() {
+        return "Day{" +
+                "maxtemp_c=" + maxtemp_c +
+                ", mintemp_c=" + mintemp_c +
+                ", avgtemp_c=" + avgtemp_c +
+                ", condition=" + condition +
+                '}';
+    }
+
 }
