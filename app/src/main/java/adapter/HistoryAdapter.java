@@ -12,7 +12,7 @@ import Model.history.ForecastDay;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
-    private List<ForecastDay> historyList;
+    private final List<ForecastDay> historyList;
 
     public HistoryAdapter(List<ForecastDay> historyList) {
         this.historyList = historyList;
@@ -29,14 +29,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         ForecastDay forecastDay = historyList.get(position);
 
-        holder.tvDate.setText(forecastDay.getDate());
-        holder.tvTemp.setText("Nhiệt độ: " + forecastDay.getDay().getAvgTempC() + "°C");
-        holder.tvCondition.setText("Thời tiết: " + forecastDay.getDay().getCondition().getText());
+        // Null check to prevent crashes in case data is missing
+        if (forecastDay != null && forecastDay.getDay() != null && forecastDay.getDay().getCondition() != null) {
+            holder.tvDate.setText(forecastDay.getDate() != null ? forecastDay.getDate() : "N/A");
+            holder.tvTemp.setText("Temperature: " + forecastDay.getDay().getAvgTempC() + "°C");
+            holder.tvCondition.setText("Condition: " + forecastDay.getDay().getCondition().getText());
+        } else {
+            // Setting placeholders in case of missing data
+            holder.tvDate.setText("N/A");
+            holder.tvTemp.setText("Temperature: N/A");
+            holder.tvCondition.setText("Condition: N/A");
+        }
     }
 
     @Override
     public int getItemCount() {
-        return historyList.size();
+        return historyList != null ? historyList.size() : 0;
     }
 
     public static class HistoryViewHolder extends RecyclerView.ViewHolder {

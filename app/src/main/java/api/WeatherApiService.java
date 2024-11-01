@@ -1,5 +1,6 @@
 package api;
 
+import Model.FivedaysWeather.Forecast5DaysResponse;
 import Model.currentWeather.WeatherResponse;
 import Model.dailyWeather.DailyWeather;
 import Model.dailyWeather.DailyWeatherResponse;
@@ -99,17 +100,17 @@ public interface WeatherApiService {
     );
 
     @GET("forecast.json")
-    Call<WeatherResponse> getWeatherForecast(
+    Call<Forecast5DaysResponse> getWeatherForecast(
             @Query("key") String apiKey,
             @Query("q") String location,
             @Query("days") int days
     );
 
     @GET("history.json")
-    Call<HistoryResponse> getWeatherHistory(
+    Call<HistoryResponse> getHistoricalWeather(
+            @Query("key") String apiKey,
             @Query("q") String location,
-            @Query("dt") String date, // Ngày theo định dạng YYYY-MM-DD
-            @Query("key") String apiKey
+            @Query("dt") String date
     );
 
 

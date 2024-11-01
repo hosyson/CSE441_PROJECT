@@ -18,10 +18,12 @@
         <action
             android:id="@+id/action_homeFragment_to_Weather24hFragment"
             app:destination="@id/Weather24hFragment" />
-
         <action
             android:id="@+id/action_homeFragment_to_Forecast5DaysFragment"
             app:destination="@id/Forecast5DaysFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_HistoryFragment"
+            app:destination="@id/HistoryFragment" />
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
     </fragment>
     <fragment

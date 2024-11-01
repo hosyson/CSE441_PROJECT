@@ -33,7 +33,7 @@ public class Forecast5DaysFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_forecast5days, container, false);
-        rvForecast = view.findViewById(R.id.rvForecast);
+        rvForecast = view.findViewById(R.id.recyclerView);
         forecastList = new ArrayList<>();
         forecastAdapter = new ForecastAdapter(getContext(), forecastList);
         rvForecast.setAdapter(forecastAdapter);
