@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp"
+android:background="#96D2EF">
+
+<TextView
+    android:id="@+id/tvTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Next 5 days"
+    android:textSize="24sp"
+    android:textStyle="bold"
+    android:textColor="@android:color/white"
+    android:layout_gravity="center_horizontal"
+    android:paddingBottom="16dp" />
+
+    <!-- Hàng nhiệt độ thấp và thông tin gió -->
+
+    <GridLayout
+        android:id="@+id/glWeather"
+        android:layout_width="match_parent"
+        android:layout_height="377dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="5"
+        android:rowCount="2"
+        android:useDefaultMargins="true">
+
+        <!-- Ngày 1 -->
+
+        <!-- Ngày 2 -->
+        <LinearLayout
+            android:layout_width="54dp"
+            android:layout_height="257dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/10"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:src="@drawable/ic_cloudy" />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29°"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="65dp"
+            android:layout_height="251dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_cloudy" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="29°"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:text="Tomorrow"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="55dp"
+            android:layout_height="30dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:text="Today"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="83dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:text="2/10"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <!-- Tạo thêm LinearLayout cho các ngày khác như ảnh. -->
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/glWeatherDetails"
+        android:layout_width="match_parent"
+        android:layout_height="219dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="5"
+        android:paddingTop="16dp"
+        android:rowCount="1"
+        android:useDefaultMargins="true">
+
+        <!-- Thông tin ngày 1 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="195dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20°"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+
+                android:src="@drawable/ic_moon" />
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cấp 4"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Tương tự tạo thêm thông tin cho các ngày khác -->
+    </GridLayout>
+</LinearLayout>
