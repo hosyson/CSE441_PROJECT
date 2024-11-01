@@ -24,6 +24,7 @@
         <action
             android:id="@+id/action_homeFragment_to_HistoryFragment"
             app:destination="@id/HistoryFragment" />
+
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
     </fragment>
     <fragment
@@ -46,6 +47,11 @@
         android:name="ui.Fivedays.Forecast5DaysFragment"
         tools:layout="@layout/fragment_forecast5days"
         android:label="5 days" />
+    <fragment
+        android:id="@+id/HistoryFragment"
+        android:name="ui.history.HistoryFragment"
+        tools:layout="@layout/fragment_history"
+        android:label="History Forecast" />
 =======
 >>>>>>> f56f26ef429d4d3f850c8bd820456896d2bdae3b
 </navigation>
