@@ -24,7 +24,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_history_day, parent, false);
         return new HistoryViewHolder(view);
     }
-    
+
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
         ForecastDay forecastDay = historyList.get(position);

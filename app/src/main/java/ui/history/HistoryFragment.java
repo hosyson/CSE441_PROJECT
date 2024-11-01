@@ -18,7 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import Model.history.Condition;
 import Model.history.Day;
 import Model.history.ForecastDay;
@@ -34,6 +34,10 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         rvHistory = view.findViewById(R.id.recyclerViewHistory);
+
+        // Gán LayoutManager cho RecyclerView
+        rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));  // Thêm dòng này
+
         historyList = new ArrayList<>();
         historyAdapter = new HistoryAdapter(historyList);
         rvHistory.setAdapter(historyAdapter);
@@ -43,9 +47,9 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
+
     private void getHistoryData(String location, String date) {
-        String apiKey = "04b3351e3f114bd7abd233330243110";
-        String url = "https://api.weatherapi.com/v1/history.json?key=" + apiKey + "&q=" + location + "&dt=" + date;
+        String url = "https://api.weatherapi.com/v1/history.json?key=04b3351e3f114bd7abd233330243110&q=Hanoi&dt=2024-10-01" + "&q=" + location + "&dt=" + date;
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -69,8 +73,8 @@ public class HistoryFragment extends Fragment {
                                 ForecastDay forecastDay = new ForecastDay();
                                 forecastDay.setDate(date);
                                 Day dayModel = new Day();
-                                dayModel.setMaxTempC(maxTemp); // Đảm bảo phương thức này đã tồn tại
-                                dayModel.setMinTempC(minTemp); // Đảm bảo phương thức này đã tồn tại
+                                dayModel.setMaxTempC(maxTemp);
+                                dayModel.setMinTempC(minTemp);
                                 Condition condition = new Condition();
                                 condition.setText(conditionText);
                                 dayModel.setCondition(condition);
@@ -91,5 +95,6 @@ public class HistoryFragment extends Fragment {
         });
         requestQueue.add(stringRequest);
     }
+
 
 }
